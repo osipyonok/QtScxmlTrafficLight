@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="TrafficLightSimulationFSM" qt:editorversion="4.8.0" datamodel="cplusplus:StopContinueDataModel:StopContinueDataModel.h" initial="Red">
+    <qt:editorinfo initialGeometry="445.32;105.93;-20;-20;40;40"/>
+    <state id="Red">
+        <qt:editorinfo geometry="445.32;251.97;-60;-50;120;100" scenegeometry="445.32;251.97;385.32;201.97;120;100"/>
+        <transition type="external" event="OnTimeout" target="Yellow2Green">
+            <qt:editorinfo movePoint="-1.03;0"/>
+        </transition>
+        <transition type="external" event="OnPauseClicked" target="Paused" cond="_IsStopped()">
+            <qt:editorinfo localGeometry="47.31;122.38" movePoint="41.14;14.39"/>
+        </transition>
+    </state>
+    <state id="Yellow2Green">
+        <qt:editorinfo geometry="71.99;465.88;-60;-50;120;100" scenegeometry="71.99;465.88;11.99;415.88;120;100"/>
+        <transition type="external" event="OnTimeout" target="Green">
+            <qt:editorinfo endTargetFactors="8.48;20.75"/>
+        </transition>
+        <transition type="external" event="OnPauseClicked" target="Paused" cond="_IsStopped()">
+            <qt:editorinfo localGeometry="202.01;68.12"/>
+        </transition>
+    </state>
+    <state id="Green">
+        <qt:editorinfo geometry="445.32;763.10;-60;-50;120;100" scenegeometry="445.32;763.10;385.32;713.10;120;100"/>
+        <transition type="external" event="OnTimeout" target="Yellow2Red"/>
+        <transition type="external" event="OnPauseClicked" target="Paused" cond="_IsStopped()">
+            <qt:editorinfo localGeometry="-65.32;-144.10" movePoint="-20;-32"/>
+        </transition>
+    </state>
+    <state id="Yellow2Red">
+        <qt:editorinfo geometry="872.11;465.88;-60;-50;120;100" scenegeometry="872.11;465.88;812.11;415.88;120;100"/>
+        <transition type="external" event="OnTimeout" target="Red"/>
+        <transition type="external" event="OnPauseClicked" target="Paused" cond="_IsStopped()">
+            <qt:editorinfo localGeometry="-230.11;56.12" movePoint="-78;40"/>
+        </transition>
+    </state>
+    <state id="Paused">
+        <qt:editorinfo geometry="445.32;465.88;-60;-50;120;100" scenegeometry="445.32;465.88;385.32;415.88;120;100"/>
+        <transition type="external" event="OnPauseClicked" target="Red" cond="_IsRunning() &amp;&amp; _IsLastRed()">
+            <qt:editorinfo localGeometry="-62.74;-90.50" movePoint="-24.69;-63.77" endTargetFactors="28.07;65.96"/>
+        </transition>
+        <transition type="external" event="OnPauseClicked" target="Yellow2Green" cond="_IsRunning() &amp;&amp; _IsLastYellow2Green()">
+            <qt:editorinfo startTargetFactors="7.85;45.79" localGeometry="-125.74;-34.67;-181.74;-23.67" endTargetFactors="84.57;44.93"/>
+        </transition>
+        <transition type="external" event="OnPauseClicked" target="Yellow2Red" cond="_IsRunning() &amp;&amp; _IsLastYellow2Red()">
+            <qt:editorinfo localGeometry="196.68;-17.88" movePoint="26;0" endTargetFactors="13.89;48.38"/>
+        </transition>
+        <transition type="external" event="OnPauseClicked" target="Green" cond="_IsRunning() &amp;&amp; _IsLastGreen()">
+            <qt:editorinfo localGeometry="53.68;151.12" movePoint="38;-9" endTargetFactors="66.68;11.98"/>
+        </transition>
+    </state>
+</scxml>
